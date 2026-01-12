@@ -1,0 +1,22 @@
+services:
+
+  ml-service:
+    build:
+      context: ./backend/ml-service
+    container_name: veera-ml
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  core-service:
+    build:
+      context: ./backend/core-service
+    container_name: veera-core
+    ports:
+      - "8080:8080"
+    environment:
+      MONGODB_URI: ${MONGODB_URI}
+      ML_SERVICE_URL: http://veera-ml:8000
+    depends_on:
+      - ml-service
+    restart: unless-stopped
