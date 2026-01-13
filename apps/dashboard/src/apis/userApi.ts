@@ -7,7 +7,9 @@ export interface User {
   isInDanger?: boolean;
 }
 
-const BASE_URL = "https://veera-core.onrender.com/api/user/user_mrinal_mkc920ad";
+// const BASE_URL = "https://veera-core.onrender.com/api/user/user_mrinal_mkc920ad";
+const BASE_URL = "https://veera-core.onrender.com/api/user";
+
 
 /**
  * Fetch all users (for dashboard overview)
@@ -26,7 +28,8 @@ export const fetchAllUsers = async (): Promise<User[]> => {
  * Fetch single user by ID (dynamic)
  */
 export const fetchUserById = async (userId: string): Promise<User> => {
-  const res = await fetch(`${BASE_URL}/${userId}`);
+  const res = await fetch(`${BASE_URL}/${userId}`)
+;
 
   if (!res.ok) {
     throw new Error("Failed to fetch user by ID");
