@@ -8,20 +8,27 @@ export interface User {
 }
 
 // const BASE_URL = "https://veera-core.onrender.com/api/user/user_mrinal_mkc920ad";
-const BASE_URL = "https://veera-core.onrender.com/api/user";
+const BASE_URL = "http://localhost:8080/api/user";
 
 
 /**
  * Fetch all users (for dashboard overview)
  */
 export const fetchAllUsers = async (): Promise<User[]> => {
-  const res = await fetch(BASE_URL);
+  try {
+    const res = await fetch(BASE_URL);
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch users");
+    if (!res.ok) {
+      console.error(`Failed to fetch users: ${res.status} ${res.statusText}`);
+      return [];
+    }
+
+    const data = await res.json();
+    return Array.isArray(data) ? data : [];
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    return [];
   }
-
-  return res.json();
 };
 
 /**

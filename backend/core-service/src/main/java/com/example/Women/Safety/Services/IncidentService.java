@@ -23,4 +23,8 @@ public class IncidentService {
     public List<Incident> getByUserId(String userId) {
         return repository.findByUserId(userId);
     }
+
+    public List<Incident> getAllIncidents() {
+        return repository.findAll();
+    }
 }

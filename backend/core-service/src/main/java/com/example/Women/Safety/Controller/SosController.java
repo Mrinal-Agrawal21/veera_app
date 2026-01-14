@@ -36,6 +36,12 @@ public class SosController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/sos")
+    public ResponseEntity<List<Incident>> getAllIncidents() {
+        List<Incident> incidents = incidentService.getAllIncidents();
+        return ResponseEntity.ok(incidents);
+    }
+
     @GetMapping("/user/{userId}")
     public ResponseEntity<?> getAllSosByUserId(@PathVariable String userId) {
         List<Incident> incidents = incidentService.getByUserId(userId);
