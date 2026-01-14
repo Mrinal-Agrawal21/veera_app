@@ -7,8 +7,8 @@ export interface User {
   isInDanger?: boolean;
 }
 
-// const BASE_URL = "https://veera-core.onrender.com/api/user/user_mrinal_mkc920ad";
-const BASE_URL = "http://localhost:8080/api/user";
+const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
+const BASE_URL = CORS_PROXY + encodeURIComponent('https://veera-core.onrender.com/api/user');
 
 
 /**
