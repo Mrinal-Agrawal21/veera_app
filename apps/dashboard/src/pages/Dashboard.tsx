@@ -6,7 +6,12 @@ import IncidentList from "@/components/veera/IncidentList";
 import IncidentMap from "@/components/veera/IncidentMap";
 import IncidentDetails from "@/components/veera/IncidentDetails";
 
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 
 import { fetchIncidents } from "@/apis/incidentsApi";
 import { fetchAllUsers } from "@/apis/userApi";
@@ -19,7 +24,9 @@ const Dashboard = () => {
 
   const [incidents, setIncidents] = useState<Incident[]>([]);
   const [users, setUsers] = useState<User[]>([]);
-  const [selectedIncident, setSelectedIncident] = useState<Incident | null>(null);
+  const [selectedIncident, setSelectedIncident] = useState<Incident | null>(
+    null
+  );
 
   const [loading, setLoading] = useState(true);
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
@@ -105,13 +112,20 @@ const Dashboard = () => {
         </div>
 
         {/* Center Panel – Map */}
-        <div className="flex-1 min-w-0">
-          <IncidentMap
-            incidents={incidents}
-            users={users}
-            selectedIncident={selectedIncident}
-            onSelectIncident={handleSelectIncident}
-          />
+        <div className="flex-1 min-w-0 flex items-center justify-center bg-muted">
+          {incidents.length > 0 ? (
+            <IncidentMap
+              incidents={incidents}
+              users={users}
+              selectedIncident={selectedIncident}
+              onSelectIncident={handleSelectIncident}
+            />
+          ) : (
+            <div className="text-center text-muted-foreground">
+              <p className="mb-2">Waiting for incident data...</p>
+              <p className="text-sm">Make sure the backend is running</p>
+            </div>
+          )}
         </div>
 
         {/* Right Panel – Details */}

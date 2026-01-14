@@ -8,7 +8,7 @@ export interface User {
 }
 
 const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
-const BASE_URL = CORS_PROXY + encodeURIComponent('https://veera-core.onrender.com/api/user');
+const BASE_URL = 'https://veera-core.onrender.com/api/user';
 
 
 /**
@@ -16,7 +16,12 @@ const BASE_URL = CORS_PROXY + encodeURIComponent('https://veera-core.onrender.co
  */
 export const fetchAllUsers = async (): Promise<User[]> => {
   try {
-    const res = await fetch(BASE_URL);
+    const res = await fetch(BASE_URL, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+      },
+    });
 
     if (!res.ok) {
       console.error(`Failed to fetch users: ${res.status} ${res.statusText}`);

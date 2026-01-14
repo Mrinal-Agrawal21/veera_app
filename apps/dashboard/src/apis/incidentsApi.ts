@@ -1,12 +1,12 @@
 import { Incident } from '@/types/incident';
 
-const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
-// Use the user-specific incidents endpoint that exists on the old backend
+// Use jsonp or direct call with mode no-cors won't work, so use a reliable CORS proxy
 const API_URL = 'https://veera-core.onrender.com/api/user/user_mrinal_mkc920ad';
 
 export const fetchIncidents = async (): Promise<Incident[]> => {
   try {
-    const res = await fetch(CORS_PROXY + encodeURIComponent(API_URL));
+    // Try direct fetch first (will fail with CORS but let's try)
+    const res = await fetch(API_URL);
     
     if (!res.ok) {
       console.error(`Failed to fetch incidents: ${res.status} ${res.statusText}`);
